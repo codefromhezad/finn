@@ -12,7 +12,7 @@
 
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-                    <table class="table table-condensed">
+                    <table class="table table-condensed dashboard-budget-table">
                         <thead>
                             <tr>
                                 <th>&#x2713;</th>
@@ -29,7 +29,7 @@
                             @foreach($entries as $entry)
                                 <tr>
                                     <td>
-                                        <input type="checkbox" data-entry-id="{{$entry->id}}" {{ $entry->checked ? "checked" : "" }}>
+                                        <input type="checkbox" class="check-entry" data-entry-id="{{$entry->id}}" {{ $entry->checked ? "checked" : "" }}>
                                     </td>
                                     <td>{{ $entry->date }}</td>
                                     <td>{{ $entry->label }}</td>
