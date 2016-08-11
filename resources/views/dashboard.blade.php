@@ -4,17 +4,19 @@
 <div class="container">
     <div class="row">
         <div class="col-md-9">
-            <div class="panel panel-default">
-                <div class="panel-heading">Budget</div>
+            <form action="{{ url('add_entry') }}" method="post">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Budget</h3>
+                    </div>
 
-                <form action="{{ url('add_entry') }}" method="post">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                     <table class="table table-condensed">
                         <thead>
                             <tr>
-                                <th>Date</th>
                                 <th>&#x2713;</th>
+                                <th>Date</th>
                                 <th>Label</th>
                                 <th>Débit</th>
                                 <th>Crédit</th>
@@ -26,10 +28,10 @@
                             <!-- Lines of data -->
                             @foreach($entries as $entry)
                                 <tr>
-                                    <td>{{ $entry->date }}</td>
                                     <td>
                                         <input type="checkbox" data-entry-id="{{$entry->id}}" {{ $entry->checked ? "checked" : "" }}>
                                     </td>
+                                    <td>{{ $entry->date }}</td>
                                     <td>{{ $entry->label }}</td>
                                     <td class="text-danger">{{ $entry->debitAmount() }}</td>
                                     <td class="text-success">{{ $entry->creditAmount() }}</td>
@@ -37,17 +39,30 @@
                                     <td></td>
                                 </tr>
                             @endforeach
+
                             <!-- New entry form -->
+                            @if (count($errors) > 0)
+                                <tr>
+                                    <td colspan="7">
+                                        <div class="alert alert-danger" style="margin-bottom: 0;">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endif
+
                             <tr class="new-line">
                                 <td>
-                                    <input style="width: 100px;" class="form-control input-sm" type="text" name="date" id="new-date">
+                                    <label style="margin-top: 4px;">
+                                        <input type="checkbox" name="checked" id="new-checked">
+                                    </label>
                                 </td>
                                 <td>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="checked" id="new-checked">
-                                        </label>
-                                    </div>
+                                    <input style="width: 100px;" class="form-control input-sm" type="text" name="date" id="new-date">
                                 </td>
                                 <td>
                                     <input class="form-control input-sm" type="text" name="label" id="new-label">
@@ -77,19 +92,43 @@
                             </tr>
                         </tbody>
                     </table>
-                </form>
-
-                <div class="panel-footer">
-                    @if (count($errors) > 0)
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
                 </div>
+            </form>
+        </div>
+
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Sitation</h3>
+                </div>
+                
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <strong>Compte visible</strong>
+                        <div class="pull-right {{ \App\BudgetEntry::visibleAccount() > 0 ? 'text-success' : 'text-danger' }}">{{ \App\BudgetEntry::visibleAccount()." ".\App\BudgetEntry::CURRENCY }}</div>
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Compte réel</strong>
+                        <div class="pull-right {{ \App\BudgetEntry::realAccount() > 0 ? 'text-success' : 'text-danger' }}">{{ \App\BudgetEntry::realAccount()." ".\App\BudgetEntry::CURRENCY }}</div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Utilisation carte <small>(7 derniers jours)</small></h3>
+                </div>
+                
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <strong>Retraits</strong>
+                        <div class="pull-right">Blabla blablabla</div>
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Paiements carte</strong>
+                        <div class="pull-right">Blabla blablabla</div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

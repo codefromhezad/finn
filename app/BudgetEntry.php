@@ -23,6 +23,17 @@ class BudgetEntry extends Model
         return Carbon::createFromFormat('Y-m-d', $value)->format('d/m/Y');
     }
 
+    public static function visibleAccount() {
+        return BudgetEntry::where('user_id', \Auth::user()->id)
+                        ->where('checked', 1)
+                        ->sum('amount');
+    }
+
+    public static function realAccount() {
+        return BudgetEntry::where('user_id', \Auth::user()->id)
+                        ->sum('amount');
+    }
+
     public function debitAmount() {
         if($this->amount < 0) {
             return abs($this->amount) . " " . BudgetEntry::CURRENCY;
