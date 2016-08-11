@@ -52,6 +52,7 @@ class HomeController extends Controller
         $new_entry = new \App\BudgetEntry();
 
         $new_entry->date = Carbon::createFromFormat('d/m/Y', $request->input('date'));
+        $new_entry->checked = $request->input('checked') ? 1 : 0;
         $new_entry->label = $request->input('label');
         $new_entry->amount = $request->input('amount-credit') ? 
                              $request->input('amount-credit') : 
@@ -62,5 +63,31 @@ class HomeController extends Controller
         $new_entry->save();
 
         return redirect()->action('HomeController@dashboard');
+    }
+
+
+    /**
+     * Update an entry from an ajax request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ajax_toggle_check_entry(Request $request)
+    {
+        $entry_id = $request->input('entry_id');
+        $checked_status = $request->input('checked') ? 1 : 0;
+
+        $entry = \App\BudgetEntry::find($entry_id);
+
+        if( $entry->user_id != \Auth::user()->id ) {
+            die('Wat ?');
+        }
+
+        $entry->checked = $checked_status;
+        $entry->save();
+
+        return response()->json([
+            'status' => 'ok',
+            'visible_account_update' => \App\BudgetEntry::visibleAccount()
+        ]);
     }
 }

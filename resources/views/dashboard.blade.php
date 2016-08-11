@@ -58,7 +58,7 @@
                             <tr class="new-line">
                                 <td>
                                     <label style="margin-top: 4px;">
-                                        <input type="checkbox" name="checked" id="new-checked">
+                                        <input type="checkbox" name="checked" id="new-checked" value="1">
                                     </label>
                                 </td>
                                 <td>
@@ -105,7 +105,7 @@
                 <ul class="list-group">
                     <li class="list-group-item">
                         <strong>Compte visible</strong>
-                        <div class="pull-right {{ \App\BudgetEntry::visibleAccount() > 0 ? 'text-success' : 'text-danger' }}">{{ \App\BudgetEntry::visibleAccount()." ".\App\BudgetEntry::CURRENCY }}</div>
+                        <div class="pull-right visible-account-update {{ \App\BudgetEntry::visibleAccount() > 0 ? 'text-success' : 'text-danger' }}">{{ \App\BudgetEntry::visibleAccount()." ".\App\BudgetEntry::CURRENCY }}</div>
                     </li>
                     <li class="list-group-item">
                         <strong>Compte réel</strong>
