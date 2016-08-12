@@ -20,7 +20,7 @@
                                 <th>Label</th>
                                 <th>Débit</th>
                                 <th>Crédit</th>
-                                <th>Channel</th>
+                                <th>Moyen P<sup>ment</sup></th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -70,13 +70,13 @@
                                 <td>
                                     <div class="input-group" style="width: 140px;">
                                         <input class="form-control input-sm" type="text" name="amount-debit" id="new-amount-debit">
-                                        <div class="input-group-addon">€</div>
+                                        <div class="input-group-addon">{{ \App\BudgetEntry::CURRENCY }}</div>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="input-group" style="width: 140px;">
                                         <input class="form-control input-sm" type="text" name="amount-credit" id="new-amount-credit">
-                                        <div class="input-group-addon">€</div>
+                                        <div class="input-group-addon">{{ \App\BudgetEntry::CURRENCY }}</div>
                                     </div>
                                 </td>
                                 <td>
@@ -122,11 +122,11 @@
                 <ul class="list-group">
                     <li class="list-group-item">
                         <strong>Retraits</strong>
-                        <div class="pull-right">Blabla blablabla</div>
+                        <div class="pull-right">{{ \App\BudgetEntry::sumWithdrawInPreviousPeriod(7)." ".\App\BudgetEntry::CURRENCY }}</div>
                     </li>
                     <li class="list-group-item">
                         <strong>Paiements carte</strong>
-                        <div class="pull-right">Blabla blablabla</div>
+                        <div class="pull-right">{{ \App\BudgetEntry::sumCardInPreviousPeriod(7)." ".\App\BudgetEntry::CURRENCY }}</div>
                     </li>
                 </ul>
             </div>
