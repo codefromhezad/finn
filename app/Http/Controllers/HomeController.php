@@ -90,4 +90,28 @@ class HomeController extends Controller
             'visible_account_update' => \App\BudgetEntry::visibleAccount()
         ]);
     }
+
+    /**
+     * Delete an entry from an ajax request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ajax_delete_entry(Request $request)
+    {
+        $entry_id = $request->input('entry_id');
+
+        $entry = \App\BudgetEntry::find($entry_id);
+
+        if( $entry->user_id != \Auth::user()->id ) {
+            die('Wat ?');
+        }
+
+        $entry->delete();
+
+        return response()->json([
+            'status' => 'ok',
+            'visible_account_update' => \App\BudgetEntry::visibleAccount(),
+            'real_account_update' => \App\BudgetEntry::realAccount(),
+        ]);
+    }
 }

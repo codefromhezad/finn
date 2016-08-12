@@ -36,7 +36,7 @@
                                     <td class="text-danger">{{ $entry->debitAmount() }}</td>
                                     <td class="text-success">{{ $entry->creditAmount() }}</td>
                                     <td>{{ $entry->channel->label }}</td>
-                                    <td></td>
+                                    <td style="text-align: center;"><a href="#" class="delete-entry" data-entry-id="{{$entry->id}}">&#x2715;</a></td>
                                 </tr>
                             @endforeach
 
@@ -109,7 +109,7 @@
                     </li>
                     <li class="list-group-item">
                         <strong>Compte réel</strong>
-                        <div class="pull-right {{ \App\BudgetEntry::realAccount() > 0 ? 'text-success' : 'text-danger' }}">{{ \App\BudgetEntry::realAccount()." ".\App\BudgetEntry::CURRENCY }}</div>
+                        <div class="pull-right real-account-update {{ \App\BudgetEntry::realAccount() > 0 ? 'text-success' : 'text-danger' }}">{{ \App\BudgetEntry::realAccount()." ".\App\BudgetEntry::CURRENCY }}</div>
                     </li>
                 </ul>
             </div>

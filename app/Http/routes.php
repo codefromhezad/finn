@@ -19,4 +19,6 @@ Route::auth();
 
 Route::get('/dashboard', 'HomeController@dashboard');
 Route::post('/add_entry', 'HomeController@add_entry');
+
 Route::post('/ajax_toggle_check_entry', 'HomeController@ajax_toggle_check_entry');
+Route::post('/ajax_delete_entry', 'HomeController@ajax_delete_entry');
