@@ -1,2 +1,21 @@
-// @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+.edit-line-template {
+	display: none;
+}
+
+.actions-td {
+	text-align: center;
+
+	a {
+		display: inline-block;
+		margin: 0 5px;
+	}
+}
+
+.edit-actions {
+	text-align: center;
+
+	a, button {
+		margin-top: 4px;
+	}
+}

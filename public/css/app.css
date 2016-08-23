@@ -1,0 +1,15 @@
+.edit-line-template {
+  display: none; }
+
+.actions-td {
+  text-align: center; }
+  .actions-td a {
+    display: inline-block;
+    margin: 0 5px; }
+
+.edit-actions {
+  text-align: center; }
+  .edit-actions a, .edit-actions button {
+    margin-top: 4px; }
+
+/*# sourceMappingURL=app.css.map */
