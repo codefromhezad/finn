@@ -105,8 +105,8 @@ $( function() {
 					$('.widget-carte').html(data['widget-carte']);
 				}
 
-				$tr.hide();
-				$source.show();
+				$tr.remove();
+				$source.replaceWith(data['line-entry']);
 			}
 		}, 'json');
 

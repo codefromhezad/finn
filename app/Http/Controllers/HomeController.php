@@ -117,10 +117,13 @@ class HomeController extends Controller
 
         $entry->save();
 
+        $entry = \App\BudgetEntry::find($entry_id);
+
         return response()->json([
             'status' => 'ok',
             'widget-situation' => \App\Widget::situation(\Auth::user()),
-            'widget-carte' => \App\Widget::carte(\Auth::user())
+            'widget-carte' => \App\Widget::carte(\Auth::user()),
+            'line-entry' => view('partials._entries_table_line', ['entry' => $entry])->render()
         ]);
     }
 
