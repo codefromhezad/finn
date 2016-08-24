@@ -67,7 +67,7 @@ class HomeController extends Controller
 
 
     /**
-     * Update an entry from an ajax request
+     * Update an entry "check" from an ajax request
      *
      * @return \Illuminate\Http\Response
      */
@@ -90,6 +90,37 @@ class HomeController extends Controller
             'visible_account_update' => \App\BudgetEntry::visibleAccount()
         ]);
     }
+
+
+    /**
+     * Update an entry from an ajax request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ajax_edit_entry(Request $request)
+    {
+        $entry_id = $request->input('entry_id');
+
+        $entry = \App\BudgetEntry::find($entry_id);
+
+        if( $entry->user_id != \Auth::user()->id ) {
+            die('Wat ?');
+        }
+
+        $entry->date = Carbon::createFromFormat('d/m/Y', $request->input('date'));
+        $entry->label = $request->input('label');
+        $entry->amount = $request->input('amount-credit') ? 
+                             $request->input('amount-credit') : 
+                             - $request->input('amount-debit');
+        $entry->channel_id = $request->input('channel_id');
+
+        $entry->save();
+
+        return response()->json([
+            'status' => 'ok',
+        ]);
+    }
+
 
     /**
      * Delete an entry from an ajax request

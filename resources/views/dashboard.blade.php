@@ -74,7 +74,7 @@
                                         </select>
                                     </td>
                                     <td class="edit-actions">
-                                        <button class="btn btn-primary btn-xs" type="submit">Ok</button>
+                                        <button class="btn btn-primary btn-xs save" data-entry-id="{{ $entry->id }}" type="submit">Ok</button>
                                         <a class="btn btn-default btn-xs cancel">Annuler</a>
                                     </td>
                                 </tr>
