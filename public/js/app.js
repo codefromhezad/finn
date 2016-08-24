@@ -11,12 +11,12 @@ $( function() {
 	$('.dashboard-budget-table').on('change', 'input.check-entry', function(e) {
 		$.post('/ajax_toggle_check_entry', {entry_id: $(this).attr('data-entry-id'), checked: $(this).is(':checked') ? 1 : 0}, function(data) {
 			if( data.status == "ok" ) {
-				var visible_update = data.visible_account_update;
-				$('.visible-account-update').html(data.visible_account_update + ' €');
-				if( data.visible_account_update > 0 ) {
-					$('.visible-account-update').removeClass('text-danger').addClass('text-success');
-				} else {
-					$('.visible-account-update').removeClass('text-success').addClass('text-danger');
+				if( data['widget-situation'] ) {
+					$('.widget-situation').html(data['widget-situation']);
+				}
+
+				if( data['widget-carte'] ) {
+					$('.widget-carte').html(data['widget-carte']);
 				}
 			}
 		}, 'json');
@@ -30,20 +30,12 @@ $( function() {
 		$.post('/ajax_delete_entry', {entry_id: $(this).attr('data-entry-id')}, function(data) {
 			if( data.status == "ok" ) {
 				
-				var visible_update = data.visible_account_update;
-				$('.visible-account-update').html(data.visible_account_update + ' €');
-				if( data.visible_account_update > 0 ) {
-					$('.visible-account-update').removeClass('text-danger').addClass('text-success');
-				} else {
-					$('.visible-account-update').removeClass('text-success').addClass('text-danger');
+				if( data['widget-situation'] ) {
+					$('.widget-situation').html(data['widget-situation']);
 				}
 
-				var real_update = data.real_account_update;
-				$('.real-account-update').html(data.real_account_update + ' €');
-				if( data.real_account_update > 0 ) {
-					$('.real-account-update').removeClass('text-danger').addClass('text-success');
-				} else {
-					$('.real-account-update').removeClass('text-success').addClass('text-danger');
+				if( data['widget-carte'] ) {
+					$('.widget-carte').html(data['widget-carte']);
 				}
 
 				$this.closest('tr').remove();
@@ -105,6 +97,14 @@ $( function() {
 		$.post('/ajax_edit_entry', send_data, function(data) {
 			if( data.status == "ok" ) {
 				
+				if( data['widget-situation'] ) {
+					$('.widget-situation').html(data['widget-situation']);
+				}
+
+				if( data['widget-carte'] ) {
+					$('.widget-carte').html(data['widget-carte']);
+				}
+
 				$tr.hide();
 				$source.show();
 			}

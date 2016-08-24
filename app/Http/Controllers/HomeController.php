@@ -87,7 +87,8 @@ class HomeController extends Controller
 
         return response()->json([
             'status' => 'ok',
-            'visible_account_update' => \App\BudgetEntry::visibleAccount()
+            'widget-situation' => \App\Widget::situation(\Auth::user()),
+            'widget-carte' => \App\Widget::carte(\Auth::user())
         ]);
     }
 
@@ -118,6 +119,8 @@ class HomeController extends Controller
 
         return response()->json([
             'status' => 'ok',
+            'widget-situation' => \App\Widget::situation(\Auth::user()),
+            'widget-carte' => \App\Widget::carte(\Auth::user())
         ]);
     }
 
@@ -141,8 +144,8 @@ class HomeController extends Controller
 
         return response()->json([
             'status' => 'ok',
-            'visible_account_update' => \App\BudgetEntry::visibleAccount(),
-            'real_account_update' => \App\BudgetEntry::realAccount(),
+            'widget-situation' => \App\Widget::situation(\Auth::user()),
+            'widget-carte' => \App\Widget::carte(\Auth::user())
         ]);
     }
 }

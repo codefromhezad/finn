@@ -137,38 +137,12 @@
         </div>
 
         <div class="col-md-3">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Sitation</h3>
-                </div>
-                
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <strong>Compte visible</strong>
-                        <div class="pull-right visible-account-update {{ \App\BudgetEntry::visibleAccount() > 0 ? 'text-success' : 'text-danger' }}">{{ \App\BudgetEntry::visibleAccount()." ".\App\BudgetEntry::CURRENCY }}</div>
-                    </li>
-                    <li class="list-group-item">
-                        <strong>Compte réel</strong>
-                        <div class="pull-right real-account-update {{ \App\BudgetEntry::realAccount() > 0 ? 'text-success' : 'text-danger' }}">{{ \App\BudgetEntry::realAccount()." ".\App\BudgetEntry::CURRENCY }}</div>
-                    </li>
-                </ul>
+            <div class="widget-situation">
+                {!! \App\Widget::situation(\Auth::user()) !!}
             </div>
 
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Utilisation carte <small>(7 derniers jours)</small></h3>
-                </div>
-                
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <strong>Retraits</strong>
-                        <div class="pull-right">{{ \App\BudgetEntry::sumWithdrawInPreviousPeriod(7)." ".\App\BudgetEntry::CURRENCY }}</div>
-                    </li>
-                    <li class="list-group-item">
-                        <strong>Paiements carte</strong>
-                        <div class="pull-right">{{ \App\BudgetEntry::sumCardInPreviousPeriod(7)." ".\App\BudgetEntry::CURRENCY }}</div>
-                    </li>
-                </ul>
+            <div class="widget-carte">
+                {!! \App\Widget::carte(\Auth::user()) !!}
             </div>
         </div>
     </div>
