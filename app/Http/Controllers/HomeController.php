@@ -65,6 +65,36 @@ class HomeController extends Controller
         return redirect()->action('HomeController@dashboard');
     }
 
+    /**
+     * Export user's account as CSV.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function csv_export(Request $request)
+    {
+        $entries = \App\BudgetEntry::where('user_id', \Auth::user()->id)
+                                ->orderBy('date', 'asc')
+                                ->get();
+
+        $csv = \League\Csv\Writer::createFromFileObject(new \SplTempFileObject());
+        $csv->insertOne(['id', 'date', 'checked', 'label', 'amount', 'payment_type']);
+
+        foreach ($entries as $entry) {
+            $entry_array = [
+                $entry->id,
+                $entry->date,
+                $entry->checked,
+                $entry->label,
+                $entry->amount,
+                \App\BudgetChannel::find($entry->channel_id)->label
+            ];
+
+            $csv->insertOne($entry_array);
+        }
+
+        $csv->output('finn-export.csv');
+    }
+
 
     /**
      * Update an entry "check" from an ajax request

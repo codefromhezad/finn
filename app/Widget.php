@@ -13,4 +13,8 @@ class Widget
     static public function carte($user) {
         return view('widgets.carte', ['user' => $user])->render();
     }
+
+    static public function tools($user) {
+        return view('widgets.tools', ['user' => $user])->render();
+    }
 }

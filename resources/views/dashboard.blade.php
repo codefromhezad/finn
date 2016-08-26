@@ -94,6 +94,10 @@
             <div class="widget-carte">
                 {!! \App\Widget::carte(\Auth::user()) !!}
             </div>
+
+            <div class="widget-tools">
+                {!! \App\Widget::tools(\Auth::user()) !!}
+            </div>
         </div>
     </div>
 </div>
