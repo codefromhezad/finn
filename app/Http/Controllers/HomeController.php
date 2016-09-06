@@ -26,7 +26,7 @@ class HomeController extends Controller
     public function dashboard()
     {
         $entries = \App\BudgetEntry::where('user_id', \Auth::user()->id)
-                                ->orderBy('date', 'asc')
+                                ->orderBy('date', 'desc')
                                 ->take(30)
                                 ->get();
 
