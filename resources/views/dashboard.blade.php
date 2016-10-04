@@ -25,11 +25,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Lines of data -->
-                            @foreach($entries as $entry)
-                                {!! view('partials._entries_table_line', ['entry' => $entry]) !!}
-                            @endforeach
-
                             <!-- New entry form -->
                             @if (count($errors) > 0)
                                 <tr>
@@ -80,6 +75,11 @@
                                     <button class="btn btn-primary btn-sm" type="submit">Ajouter</button>
                                 </td>
                             </tr>
+                            
+                            <!-- Lines of data -->
+                            @foreach($entries as $entry)
+                                {!! view('partials._entries_table_line', ['entry' => $entry]) !!}
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -93,6 +93,10 @@
 
             <div class="widget-carte">
                 {!! \App\Widget::carte(\Auth::user()) !!}
+            </div>
+
+            <div class="widget-tools">
+                {!! \App\Widget::tools(\Auth::user()) !!}
             </div>
         </div>
     </div>

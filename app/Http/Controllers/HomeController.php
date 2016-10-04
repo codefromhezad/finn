@@ -26,7 +26,7 @@ class HomeController extends Controller
     public function dashboard()
     {
         $entries = \App\BudgetEntry::where('user_id', \Auth::user()->id)
-                                ->orderBy('date', 'asc')
+                                ->orderBy('date', 'desc')
                                 ->take(60)
                                 ->get();
 
@@ -63,6 +63,36 @@ class HomeController extends Controller
         $new_entry->save();
 
         return redirect()->action('HomeController@dashboard');
+    }
+
+    /**
+     * Export user's account as CSV.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function csv_export(Request $request)
+    {
+        $entries = \App\BudgetEntry::where('user_id', \Auth::user()->id)
+                                ->orderBy('date', 'asc')
+                                ->get();
+
+        $csv = \League\Csv\Writer::createFromFileObject(new \SplTempFileObject());
+        $csv->insertOne(['id', 'date', 'checked', 'label', 'amount', 'payment_type']);
+
+        foreach ($entries as $entry) {
+            $entry_array = [
+                $entry->id,
+                $entry->date,
+                $entry->checked,
+                $entry->label,
+                $entry->amount,
+                \App\BudgetChannel::find($entry->channel_id)->label
+            ];
+
+            $csv->insertOne($entry_array);
+        }
+
+        $csv->output('finn-export.csv');
     }
 
 
