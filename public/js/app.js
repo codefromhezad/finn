@@ -17,14 +17,20 @@ $( function() {
 		today: "Aujourd'hui",
 		weekStart: 1
 	};
-	$('#new-date').datepicker({
-		format: 'dd/mm/yyyy',
-		weekStart: 1,
-		autoclose: true,
-		language: 'fr'
-	}).on('changeDate', function() {
+	$.fn.initDatePicker = function() {
+		return $(this).each( function() {
+			$(this).datepicker({
+				format: 'dd/mm/yyyy',
+				weekStart: 1,
+				autoclose: true,
+				language: 'fr'
+			});
+		});
+	}
+	$('#new-date').initDatePicker().on('changeDate', function() {
 		$('#new-label').focus();
 	});
+
 
 	/* Ajax checking budget entries on Dashboard */
 	$('.dashboard-budget-table').on('change', 'input.check-entry', function(e) {
@@ -74,8 +80,10 @@ $( function() {
 		var tr_id = $tr.attr('data-line-id');
 		var $editor = $('.dashboard-budget-table tr.edit-line-template[data-line-id='+tr_id+']');
 
+		$editor.find('#edit-date').initDatePicker();
+
 		$tr.hide();
-		$editor.show();
+		$editor.addClass('shown');
 	});
 
 	/* Cancel AJAX edition */
@@ -88,7 +96,7 @@ $( function() {
 		var tr_id = $tr.attr('data-line-id');
 		var $source = $('.dashboard-budget-table tr.read-line[data-line-id='+tr_id+']');
 
-		$tr.hide();
+		$tr.removeClass('shown');
 		$source.show();
 
 		return false;

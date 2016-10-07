@@ -3,7 +3,7 @@
         <input type="checkbox" class="check-entry" data-entry-id="{{$entry->id}}" {{ $entry->checked ? "checked" : "" }}>
     </td>
     <td>{{ $entry->date }}</td>
-    <td>{{ $entry->label }}</td>
+    <td><div class="entry-text-label" title="{{ $entry->label }}">{{ $entry->label }}</div></td>
     <td class="text-danger">{{ $entry->debitAmount() }}</td>
     <td class="text-success">{{ $entry->creditAmount() }}</td>
     <td>{{ $entry->channel->label }}</td>
@@ -27,13 +27,13 @@
     </td>
     <td>
         <div class="input-group" style="width: 140px;">
-            <input class="form-control input-sm" type="text" name="edit-amount-debit" id="edit-amount-debit" value="{{ $entry->amount < 0 ? number_format(abs($entry->amount), 2)." ".\App\BudgetEntry::CURRENCY : "" }}">
+            <input class="form-control input-sm" type="text" name="edit-amount-debit" id="edit-amount-debit" value="{{ $entry->amount < 0 ? number_format(abs($entry->amount), 2) : "" }}">
             <div class="input-group-addon">{{ \App\BudgetEntry::CURRENCY }}</div>
         </div>
     </td>
     <td>
         <div class="input-group" style="width: 140px;">
-            <input class="form-control input-sm" type="text" name="edit-amount-credit" id="edit-amount-credit" value="{{ $entry->amount > 0 ? number_format(abs($entry->amount), 2)." ".\App\BudgetEntry::CURRENCY : "" }}">
+            <input class="form-control input-sm" type="text" name="edit-amount-credit" id="edit-amount-credit" value="{{ $entry->amount > 0 ? number_format(abs($entry->amount), 2) : "" }}">
             <div class="input-group-addon">{{ \App\BudgetEntry::CURRENCY }}</div>
         </div>
     </td>
