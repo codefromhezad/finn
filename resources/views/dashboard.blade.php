@@ -18,18 +18,7 @@
 
                     <table class="table table-condensed dashboard-budget-table">
                         <thead>
-                            <tr>
-                                <th>&#x2713;</th>
-                                <th>Date</th>
-                                <th>Label</th>
-                                <th>Débit</th>
-                                <th>Crédit</th>
-                                <th>Moyen P<sup>ment</sup></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- New entry form -->
+                            <!-- New entry validation errors -->
                             @if (count($errors) > 0)
                                 <tr>
                                     <td colspan="7">
@@ -44,34 +33,48 @@
                                 </tr>
                             @endif
 
+                            <tr>
+                                <th>&#x2713;</th>
+                                <th>Date</th>
+                                <th>Label</th>
+                                <th>Débit</th>
+                                <th>Crédit</th>
+                                <th>Moyen P<sup>ment</sup></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- New entry form -->
                             <tr class="new-line">
                                 <td>
                                     <label style="margin-top: 4px;">
-                                        <input type="checkbox" name="checked" id="new-checked" value="1">
+                                        <input type="checkbox" name="checked" id="new-checked" value="1" {{ old('checked') ? "checked" : "" }}>
                                     </label>
                                 </td>
                                 <td>
-                                    <input style="width: 100px;" class="form-control input-sm" type="text" name="date" id="new-date">
+                                    <input style="width: 100px;" class="form-control input-sm" type="text" name="date" id="new-date" value="{{ old('date') }}">
                                 </td>
                                 <td>
-                                    <input class="form-control input-sm" type="text" name="label" id="new-label">
+                                    <input class="form-control input-sm" type="text" name="label" id="new-label" value="{{ old('label') }}">
                                 </td>
                                 <td>
                                     <div class="input-group" style="width: 140px;">
-                                        <input class="form-control input-sm" type="text" name="amount-debit" id="new-amount-debit">
+                                        <input class="form-control input-sm" type="text" name="amount-debit" id="new-amount-debit" value="{{ old('amount-debit') }}">
                                         <div class="input-group-addon">{{ \App\BudgetEntry::CURRENCY }}</div>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="input-group" style="width: 140px;">
-                                        <input class="form-control input-sm" type="text" name="amount-credit" id="new-amount-credit">
+                                        <input class="form-control input-sm" type="text" name="amount-credit" id="new-amount-credit" value="{{ old('amount-credit') }}">
                                         <div class="input-group-addon">{{ \App\BudgetEntry::CURRENCY }}</div>
                                     </div>
                                 </td>
                                 <td>
                                     <select class="form-control input-sm" name="channel_id" id="new-channel_id">
                                         @foreach(\App\BudgetChannel::all() as $channel)
-                                            <option value="{{ $channel->id }}" {{ $channel->slug == "carte-credit" ? "selected" : "" }}>{{ $channel->label }}</option>
+                                            <option value="{{ $channel->id }}" {{ $channel->html_select_id(old('channel_id')) }}>
+                                                {{ $channel->label }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </td>
