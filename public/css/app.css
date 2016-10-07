@@ -1,15 +1,29 @@
-.edit-line-template {
+.container.dashboard .panel-heading {
+  position: relative; }
+  .container.dashboard .panel-heading .pagination-nav {
+    position: absolute;
+    right: 5px;
+    top: 5px; }
+    .container.dashboard .panel-heading .pagination-nav ul.pagination {
+      margin: 0;
+      display: block; }
+      .container.dashboard .panel-heading .pagination-nav ul.pagination li span,
+      .container.dashboard .panel-heading .pagination-nav ul.pagination li a {
+        padding: 2px 8px;
+        line-height: 21px; }
+
+.container.dashboard .edit-line-template {
   display: none; }
 
-.actions-td {
+.container.dashboard .actions-td {
   text-align: center; }
-  .actions-td a {
+  .container.dashboard .actions-td a {
     display: inline-block;
     margin: 0 5px; }
 
-.edit-actions {
+.container.dashboard .edit-actions {
   text-align: center; }
-  .edit-actions a, .edit-actions button {
+  .container.dashboard .edit-actions a, .container.dashboard .edit-actions button {
     margin-top: 4px; }
 
 /*# sourceMappingURL=app.css.map */

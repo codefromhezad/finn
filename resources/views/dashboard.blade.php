@@ -1,13 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container dashboard">
     <div class="row">
         <div class="col-md-9">
             <form action="{{ url('add_entry') }}" method="post">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Budget</h3>
+                        <h3 class="panel-title">Transactions</h3>
+
+                        <nav class="pagination-nav">
+                            {{ $entries->links() }}
+                        </nav>
                     </div>
 
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">

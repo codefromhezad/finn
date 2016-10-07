@@ -27,8 +27,7 @@ class HomeController extends Controller
     {
         $entries = \App\BudgetEntry::where('user_id', \Auth::user()->id)
                                 ->orderBy('date', 'desc')
-                                ->take(60)
-                                ->get();
+                                ->paginate(30);
 
         return view('dashboard', ['entries' => $entries]);
     }

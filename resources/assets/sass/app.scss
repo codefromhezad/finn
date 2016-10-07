@@ -1,21 +1,46 @@
 
-.edit-line-template {
-	display: none;
-}
+.container.dashboard {
 
-.actions-td {
-	text-align: center;
+	.panel-heading {
+		position: relative;
 
-	a {
-		display: inline-block;
-		margin: 0 5px;
+		.pagination-nav {
+			position: absolute;
+			right: 5px;
+			top: 5px;
+
+			ul.pagination {
+				margin: 0;
+				display: block;
+
+				li span,
+				li a {
+					padding: 2px 8px;
+					line-height: 21px;
+				}
+			}
+		}
+	}
+
+	.edit-line-template {
+		display: none;
+	}
+
+	.actions-td {
+		text-align: center;
+
+		a {
+			display: inline-block;
+			margin: 0 5px;
+		}
+	}
+
+	.edit-actions {
+		text-align: center;
+
+		a, button {
+			margin-top: 4px;
+		}
 	}
 }
 
-.edit-actions {
-	text-align: center;
-
-	a, button {
-		margin-top: 4px;
-	}
-}
