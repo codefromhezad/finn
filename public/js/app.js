@@ -7,6 +7,25 @@ $( function() {
         }
 	});
 
+	/* Setup UI datepicker */
+	$.fn.datepicker.dates['fr'] = {
+		days: ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"],
+		daysShort: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"],
+		daysMin: ["D", "L", "Ma", "Me", "J", "V", "S", "D"],
+		months: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+		monthsShort: ["Jan", "Fev", "Mar", "Avr", "Mai", "Jui", "Jul", "Aou", "Sep", "Oct", "Nov", "Dec"],
+		today: "Aujourd'hui",
+		weekStart: 1
+	};
+	$('#new-date').datepicker({
+		format: 'dd/mm/yyyy',
+		weekStart: 1,
+		autoclose: true,
+		language: 'fr'
+	}).on('changeDate', function() {
+		$('#new-label').focus();
+	});
+
 	/* Ajax checking budget entries on Dashboard */
 	$('.dashboard-budget-table').on('change', 'input.check-entry', function(e) {
 		$.post('/ajax_toggle_check_entry', {entry_id: $(this).attr('data-entry-id'), checked: $(this).is(':checked') ? 1 : 0}, function(data) {

@@ -1,3 +1,31 @@
+@charset "UTF-8";
+/* Generic styles */
+.datepicker .icon-arrow-right,
+.datepicker .icon-arrow-left {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: relative; }
+  .datepicker .icon-arrow-right:after,
+  .datepicker .icon-arrow-left:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    color: #000;
+    font-style: normal;
+    font-size: 30px;
+    line-height: 20px; }
+
+.datepicker .icon-arrow-left:after {
+  content: "◂"; }
+
+.datepicker .icon-arrow-right:after {
+  content: "▸"; }
+
+/* Dashboard styles */
 .container.dashboard .panel-heading {
   position: relative; }
   .container.dashboard .panel-heading .pagination-nav {
